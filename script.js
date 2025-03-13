@@ -1,19 +1,25 @@
 const elements = {
-    themeToggle: document.getElementById("theme-toggle"),
-    test: document.getElementById('test')
-
+    themeToggleBtn: document.getElementById("theme-toggle"),
+    root : document.documentElement
 };
 
 let dark = false;
 
 function initializeApp() {
-    elements.themeToggle.addEventListener('click', test);
-    
+    elements.themeToggleBtn.addEventListener('click', updateTheme);
+    elements.themeToggleBtn.innerText = "Switch to Dark Mode";
 };
 
-function test() {
+function updateTheme() {
     dark = !dark;
- dark ? elements.test.innerText = "theme is dark" : elements.test.innerText = "theme is light";
+
+    if (dark) {
+        elements.root.setAttribute("data-theme", "dark"); 
+        elements.themeToggleBtn.textContent = "Switch to Light Mode";
+    } else {
+        elements.root.removeAttribute("data-theme");
+        elements.themeToggleBtn.textContent = "Switch to Dark Mode";
+    };
 };
 
 initializeApp();
